@@ -1,0 +1,126 @@
+{
+  "toast": {
+    "butter": {
+      "body": "body_toast_butter",
+      "bread_bbox": [
+        147,
+        33,
+        385,
+        250
+      ],
+      "bread_w": 238,
+      "center": [
+        266.0,
+        141.5
+      ],
+      "far_anchor": [
+        373.1,
+        104.61
+      ],
+      "near_anchor": [
+        196.9,
+        111.12
+      ],
+      "size": [
+        512,
+        257
+      ],
+      "tilt_deg": 24.0
+    },
+    "dark": {
+      "body": "body_toast_dark",
+      "bread_bbox": [
+        148,
+        19,
+        390,
+        267
+      ],
+      "bread_w": 242,
+      "center": [
+        269.0,
+        143.0
+      ],
+      "far_anchor": [
+        365.9,
+        100.84
+      ],
+      "near_anchor": [
+        195.1,
+        108.28
+      ],
+      "size": [
+        512,
+        275
+      ],
+      "tilt_deg": 30.0
+    },
+    "jam": {
+      "body": "body_toast_jam",
+      "bread_bbox": [
+        146,
+        36,
+        387,
+        239
+      ],
+      "bread_w": 241,
+      "center": [
+        266.5,
+        137.5
+      ],
+      "far_anchor": [
+        374.95,
+        102.99
+      ],
+      "near_anchor": [
+        197.05,
+        109.08
+      ],
+      "size": [
+        512,
+        252
+      ],
+      "tilt_deg": 6.0
+    },
+    "plain": {
+      "body": "body_toast_plain",
+      "bread_bbox": [
+        146,
+        18,
+        388,
+        264
+      ],
+      "bread_w": 242,
+      "center": [
+        267.0,
+        141.0
+      ],
+      "far_anchor": [
+        372.9,
+        99.18
+      ],
+      "near_anchor": [
+        202.1,
+        106.56
+      ],
+      "size": [
+        512,
+        271
+      ],
+      "tilt_deg": 20.0
+    }
+  },
+  "toaster": {
+    "body": "body_toaster",
+    "size": [
+      600,
+      668
+    ]
+  },
+  "wing": {
+    "file": "wing_master",
+    "pivot": [
+      127.5,
+      35.37
+    ]
+  }
+}

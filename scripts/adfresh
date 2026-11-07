@@ -1,0 +1,8 @@
+#!/bin/sh
+ROOT="$(CDPATH= cd -- "$(dirname "$0")/.." && pwd)"
+export PYTHONPATH="$ROOT${PYTHONPATH:+:$PYTHONPATH}"
+export PYGAME_HIDE_SUPPORT_PROMPT=1
+export SDL_VIDEO_ALLOW_SCREENSAVER=1
+export SDL_APP_NAME=adfresh
+export SDL_VIDEO_X11_WMCLASS=adfresh
+exec "$ROOT/.venv/bin/python" -m adfresh "$@"
