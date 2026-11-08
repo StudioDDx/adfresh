@@ -7,13 +7,25 @@ from datetime import datetime
 
 import pygame
 
-from adfresh.drawutil import font, radial, vertical_gradient
+from adfresh.drawutil import font, radial, vertical_gradient, vignette
 from adfresh.modules.base import Module
 
 
 class Clock(Module):
     id = "clock"
     title = "Clock"
+
+    def resize(self, w: int, h: int) -> None:
+        super().resize(w, h)
+        self.stars = [
+            (
+                self.rng.uniform(0, w),
+                self.rng.uniform(0, h),
+                self.rng.uniform(0.8, 2.4),  # twinkle speed
+                self.rng.uniform(0, math.tau),  # twinkle phase
+            )
+            for _ in range(max(50, w // 16))
+        ]
 
     def draw(self, surf: pygame.Surface) -> None:
         sky = vertical_gradient(
@@ -22,9 +34,13 @@ class Clock(Module):
             [(0.0, (6, 8, 18)), (0.6, (10, 14, 28)), (1.0, (8, 8, 14))],
         )
         surf.blit(sky, (0, 0))
+        for x, y, speed, phase in self.stars:
+            level = int(90 + 100 * (0.5 + 0.5 * math.sin(self.t * speed + phase)))
+            surf.set_at((int(x), int(y)), (level, level, min(255, level + 10)))
         cx, cy = self.w / 2, self.h * 0.46
         radius = min(self.w, self.h) * 0.30
-        glow = radial(int(radius * 3.2), (80, 100, 150), 70)
+        pulse = 60 + int(18 * (0.5 + 0.5 * math.sin(self.t * 0.7)))
+        glow = radial(int(radius * 3.2), (80, 100, 150), pulse)
         surf.blit(glow, (int(cx - glow.get_width() / 2), int(cy - glow.get_height() / 2)))
         pygame.draw.circle(surf, (20, 22, 32), (int(cx), int(cy)), int(radius - 6))
         for i in range(60):
@@ -44,12 +60,24 @@ class Clock(Module):
         self._hand(surf, cx, cy, hour / 12 * math.tau, radius * 0.48, radius * 0.035, (236, 230, 214))
         self._hand(surf, cx, cy, minute / 60 * math.tau, radius * 0.70, radius * 0.02, (236, 230, 214))
         self._hand(surf, cx, cy, sec / 60 * math.tau, radius * 0.78, radius * 0.008, (232, 150, 86))
+        # Fading tail trailing the second hand, about five seconds long.
+        for back in range(1, 26):
+            age = back / 25
+            angle = (sec - back * 0.2) / 60 * math.tau
+            shade = int(150 * (1 - age) ** 2)
+            if shade < 8:
+                break
+            tip = radius * 0.78 * (1 - age * 0.12)
+            x0 = cx + math.sin(angle) * tip
+            y0 = cy - math.cos(angle) * tip
+            pygame.draw.circle(surf, (shade, int(shade * 0.62), int(shade * 0.35)), (int(x0), int(y0)), max(1, int(radius * 0.007)))
         pygame.draw.circle(surf, (236, 230, 214), (int(cx), int(cy)), max(3, int(radius * 0.03)))
         scale = max(0.7, self.h / 1080)
         digital = font("mono", int(54 * scale)).render(now.strftime("%H:%M"), True, (236, 230, 214))
         date = font("regular", int(22 * scale)).render(now.strftime("%A  ·  %d %B"), True, (176, 180, 196))
         surf.blit(digital, (int(cx - digital.get_width() / 2), int(cy + radius + 28 * scale)))
         surf.blit(date, (int(cx - date.get_width() / 2), int(cy + radius + 28 * scale + digital.get_height() + 6)))
+        surf.blit(vignette(self.w, self.h), (0, 0))
 
     def _hand(self, surf, cx, cy, angle, length, width, color) -> None:
         dx, dy = math.sin(angle), -math.cos(angle)

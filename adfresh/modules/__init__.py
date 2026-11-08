@@ -3,11 +3,14 @@
 from __future__ import annotations
 
 from adfresh.modules.aquatic import Aquatic
+from adfresh.modules.aurora import Aurora
 from adfresh.modules.clock import Clock
 from adfresh.modules.fringe import Fringe
+from adfresh.modules.lava import Lava
 from adfresh.modules.marbles import Marbles
 from adfresh.modules.messages import Messages
 from adfresh.modules.mountains import Mountains
+from adfresh.modules.mystify import Mystify
 from adfresh.modules.pipes import Pipes
 from adfresh.modules.rain import Rain
 from adfresh.modules.satori import Satori
@@ -18,10 +21,13 @@ from adfresh.modules.warp import Warp
 CATALOG = [
     Toasters,
     Starry,
+    Aurora,
     Aquatic,
     Rain,
+    Lava,
     Pipes,
     Warp,
+    Mystify,
     Marbles,
     Mountains,
     Fringe,

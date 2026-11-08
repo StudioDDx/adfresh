@@ -4,8 +4,9 @@ A modular night screensaver in the spirit of the classic After Dark suites. The
 drawings are original: chrome toasters with cream wings, buttered and dark toast,
 a 3D pipe maze, and nine other modules for the after-hours desk.
 
-Modules: Flying Toasters, Starry Night, Aquatic Realm, Hard Rain, Pipes, Warp,
-Marbles, Mountains, Lunatic Fringe, Clock, Messages, Satori.
+Modules: Flying Toasters, Starry Night, Aurora, Aquatic Realm, Hard Rain, Lava
+Lamp, Pipes, Warp, Mystify, Marbles, Mountains, Lunatic Fringe, Clock,
+Messages, Satori.
 
 ## Run
 
